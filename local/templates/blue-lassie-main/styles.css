@@ -1,0 +1,42 @@
+a:hover {
+  color: none; 
+}
+.contacts__tel:hover {
+  color: black; 
+}
+.socials__name:hover {
+  color: white; 
+}
+ul.goods{
+	list-style: none;
+	padding-left: 0;
+}
+
+ul{
+
+	padding-left: 0;
+}
+
+.good:hover.like{
+  text-decoration: none;
+  opacity: 1;
+}
+.container{
+	max-width: 1280px;
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.title{
+	margin-bottom: 0 !important;
+}
+
+ul.header__menu{
+	list-style: none;
+	padding-left: 0;
+}
+
+a.btn:hover {
+  color: none; 
+}
+
