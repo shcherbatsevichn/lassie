@@ -987,6 +987,10 @@
 	user-select: none;
 }
 
+a.btn-link:hover {
+  color: white !important; 
+}
+
 input[type='number'] { -moz-appearance: textfield; }
 
 input::-webkit-outer-spin-button,

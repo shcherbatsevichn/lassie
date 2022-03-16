@@ -159,26 +159,8 @@ $containerName = 'container-'.$navParams['NavNum'];
 $themeClass = isset($arParams['TEMPLATE_THEME']) ? ' bx-'.$arParams['TEMPLATE_THEME'] : '';
 
 ?>
-						<div class="catalog__sort">
-							<div class="catalog__sort-group"><span class="catalog__sort-text text">Сортировать по:</span>
-								<select name="sort" class="js-select select">
-									<option value="popular">Популярности</option>
-									<option value="price">Цене</option>
-									<option value="new">Новизне</option>
-									<option value="availibel">Наличию</option>
-								</select>
-							</div>
-							<div class="catalog__sort-group" style="z-index: 250;"><span class="catalog__sort-text text">Отображать по:</span>
-								<select name="display" class="js-select select" style="padding-left: 0;">
-									<option value="12">12</option>
-									<option value="9">9</option>
-									<option value="6">6</option>
-									<option value="3">3</option>
-								</select>
-							</div>
-						</div>
-						<div class="catalog__goods-wrapper">
-						<div class="row<?=$themeClass?>"> <? // wrapper ?>
+	<div class="catalog__goods-wrapper">
+		<div class="row<?=$themeClass?>"> <? // wrapper ?>
 
 	
 	<?
@@ -228,7 +210,7 @@ $themeClass = isset($arParams['TEMPLATE_THEME']) ? ' bx-'.$arParams['TEMPLATE_TH
 					
 					foreach ($arResult['ITEM_ROWS'] as $rowData)
 					{
-						$rowItems = array_splice($arResult['ITEMS'], 0, 12);
+						$rowItems = array_splice($arResult['ITEMS'], 0, $arParams['PAGE_ELEMENT_COUNT']);
 						
 						?>
 						
@@ -297,7 +279,7 @@ $themeClass = isset($arParams['TEMPLATE_THEME']) ? ' bx-'.$arParams['TEMPLATE_TH
 			<div class="catalog__more" data-entity="lazy-<?=$containerName?>">
 				<a href="javascript:void(0);" class="catalog__more-btn link" data-use="show-more-<?=$navParams['NavNum']?>">
 					<span class="icon-load">
-					</span>Загрузить еще 12 товаров
+					</span>Загрузить еще <?=$arParams['PAGE_ELEMENT_COUNT']?> товаров
 				</a>
 				<a href="/catalog/shoes/?SHOWALL_1=1" rel="nofollow" class="link text">
 					Показать все

@@ -27,7 +27,7 @@ use \Bitrix\Main\Localization\Loc;
 
 
 <article class="good">
-	<div class="good__content">
+	<div class="good__content" style="height:315px">
 	<? if ($itemHasDetailUrl): ?>
 	<a class="product-item-image-wrapper" href="<?=$item['DETAIL_PAGE_URL']?>" title="<?=$imgTitle?>"
 		data-entity="image-wrapper">

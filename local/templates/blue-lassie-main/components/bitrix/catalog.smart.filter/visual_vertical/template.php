@@ -17,7 +17,7 @@ $templateData = array(
 	'TEMPLATE_CLASS' => 'bx_'.$arParams['TEMPLATE_THEME']
 );
 ?>
-	<form action="<?echo $arResult["FORM_ACTION"]?>" class="catalog-page__filter catalog__filter form" name="<?echo $arResult["FILTER_NAME"]."_form"?>"  method="get" >
+	<form action="<?echo $arResult["FORM_ACTION"]?>" style="width:270px" class="catalog-page__filter catalog__filter form" name="<?echo $arResult["FILTER_NAME"]."_form"?>"  method="get" >
             <fieldset class="form__fieldset">
                 <legend style="float: none;" class="form__title form__title_align_center"><?echo ("Фильтр");//GetMessage("CT_BCSF_FILTER_TITLE")?></legend>
 			<?

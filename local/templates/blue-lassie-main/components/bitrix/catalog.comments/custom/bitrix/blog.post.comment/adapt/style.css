@@ -33,12 +33,18 @@ div.blog-comment-buttons input {
 .bxhtmled-area-cnt {
 	top: 0px !important;
 	height: 83px !important;
+	width: 400px !important;
 }
 .bxhtmled-iframe-cnt {
 	height: 83px !important;
+	width: 400px !important;
 }
 .bx-html-editor {
-	   
+	width: 400px !important;
 	min-height: 83px !important;
 	height: 82px !important;
+}
+
+input.btn:hover {
+  color: white !important; 
 }

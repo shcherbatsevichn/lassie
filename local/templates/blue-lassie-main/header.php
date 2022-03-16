@@ -50,49 +50,49 @@ Loc::loadMessages(__FILE__);
 							</li>
 						</ul>
 						<?$APPLICATION->IncludeComponent(
-	"bitrix:search.title", 
-	"bootstrap_v4", 
-	array(
-		"NUM_CATEGORIES" => "1",
-		"TOP_COUNT" => "5",
-		"CHECK_DATES" => "N",
-		"SHOW_OTHERS" => "N",
-		"PAGE" => SITE_DIR."catalog/",
-		"CATEGORY_0_TITLE" => GetMessage("SEARCH_GOODS"),
-		"CATEGORY_0" => array(
-			0 => "iblock_catalog",
-		),
-		"CATEGORY_0_iblock_catalog" => array(
-			0 => "all",
-		),
-		"CATEGORY_OTHERS_TITLE" => GetMessage("SEARCH_OTHER"),
-		"SHOW_INPUT" => "Y",
-		"INPUT_ID" => "title-search-input",
-		"CONTAINER_ID" => "search",
-		"PRICE_CODE" => array(
-			0 => "BASE",
-		),
-		"SHOW_PREVIEW" => "Y",
-		"PREVIEW_WIDTH" => "75",
-		"PREVIEW_HEIGHT" => "75",
-		"CONVERT_CURRENCY" => "Y",
-		"COMPONENT_TEMPLATE" => "bootstrap_v4",
-		"ORDER" => "date",
-		"USE_LANGUAGE_GUESS" => "Y",
-		"TEMPLATE_THEME" => "blue",
-		"PRICE_VAT_INCLUDE" => "Y",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"CURRENCY_ID" => "RUB"
-	),
-	false
-);?>
+							"bitrix:search.title", 
+							"bootstrap_v4", 
+							array(
+								"NUM_CATEGORIES" => "1",
+								"TOP_COUNT" => "5",
+								"CHECK_DATES" => "N",
+								"SHOW_OTHERS" => "N",
+								"PAGE" => SITE_DIR."catalog/",
+								"CATEGORY_0_TITLE" => GetMessage("SEARCH_GOODS"),
+								"CATEGORY_0" => array(
+									0 => "iblock_catalog",
+								),
+								"CATEGORY_0_iblock_catalog" => array(
+									0 => "all",
+								),
+								"CATEGORY_OTHERS_TITLE" => GetMessage("SEARCH_OTHER"),
+								"SHOW_INPUT" => "Y",
+								"INPUT_ID" => "title-search-input",
+								"CONTAINER_ID" => "search",
+								"PRICE_CODE" => array(
+									0 => "BASE",
+								),
+								"SHOW_PREVIEW" => "Y",
+								"PREVIEW_WIDTH" => "75",
+								"PREVIEW_HEIGHT" => "75",
+								"CONVERT_CURRENCY" => "Y",
+								"COMPONENT_TEMPLATE" => "bootstrap_v4",
+								"ORDER" => "date",
+								"USE_LANGUAGE_GUESS" => "Y",
+								"TEMPLATE_THEME" => "blue",
+								"PRICE_VAT_INCLUDE" => "Y",
+								"PREVIEW_TRUNCATE_LEN" => "",
+								"CURRENCY_ID" => "RUB"
+							),
+							false
+						);?>
 					</div>
 				</div>
 			</div>
 			<div class="header__middle">
 				<div class="container header__container header__container_middle">
 					<div class="header__col header__col_logo">
-						<a href="<?=SITE_DIR?>" class="header__logo logo">
+						<a href="<?=SITE_DIR?>" class="header__logo logo">  <!-- logo -->
                             <?$APPLICATION->IncludeComponent(
 							"bitrix:main.include",
 							"",
@@ -117,34 +117,34 @@ Loc::loadMessages(__FILE__);
 						<div class="header__col header__col_contacts"><a href="<?=SITE_DIR."purchases/kontakts/"?>" class="link"><?=GetMessage('CONTACT_INFO')?></a>
 						</div>
 					</div>
-					<div class="header__col header__col_basket">
-					<?$APPLICATION->IncludeComponent(
-	"custom:sale.basket.basket.line", 
-	"def", 
-	array(
-		"HIDE_ON_BASKET_PAGES" => "N",
-		"PATH_TO_AUTHORIZE" => "",
-		"PATH_TO_BASKET" => SITE_DIR."personal/cart/",
-		"PATH_TO_ORDER" => SITE_DIR."personal/order/make/",
-		"PATH_TO_PERSONAL" => SITE_DIR."personal/",
-		"PATH_TO_PROFILE" => SITE_DIR."personal/",
-		"PATH_TO_REGISTER" => SITE_DIR."login/",
-		"POSITION_FIXED" => "N",
-		"SHOW_AUTHOR" => "N",
-		"SHOW_EMPTY_VALUES" => "Y",
-		"SHOW_NUM_PRODUCTS" => "Y",
-		"SHOW_PERSONAL_LINK" => "Y",
-		"SHOW_PRODUCTS" => "N",
-		"SHOW_REGISTRATION" => "N",
-		"SHOW_TOTAL_PRICE" => "Y",
-		"COMPONENT_TEMPLATE" => "def"
-	),
-	false
-);?>
+					<div class="header__col header__col_basket">    <!-- малая корзина --> 
+						<?$APPLICATION->IncludeComponent(                   
+							"custom:sale.basket.basket.line", 
+							"def", 
+							array(
+								"HIDE_ON_BASKET_PAGES" => "N",
+								"PATH_TO_AUTHORIZE" => "",
+								"PATH_TO_BASKET" => SITE_DIR."personal/cart/",
+								"PATH_TO_ORDER" => SITE_DIR."personal/order/make/",
+								"PATH_TO_PERSONAL" => SITE_DIR."personal/",
+								"PATH_TO_PROFILE" => SITE_DIR."personal/",
+								"PATH_TO_REGISTER" => SITE_DIR."login/",
+								"POSITION_FIXED" => "N",
+								"SHOW_AUTHOR" => "N",
+								"SHOW_EMPTY_VALUES" => "Y",
+								"SHOW_NUM_PRODUCTS" => "Y",
+								"SHOW_PERSONAL_LINK" => "Y",
+								"SHOW_PRODUCTS" => "N",
+								"SHOW_REGISTRATION" => "N",
+								"SHOW_TOTAL_PRICE" => "Y",
+								"COMPONENT_TEMPLATE" => "def"
+							),
+							false
+						);?>
 					</div>
 				</div>
 			</div>
-			<div class="header__bottom">
+			<div class="header__bottom">  <!-- отображаем вертикальное меню --> 
 				<div class="container">
 					<?$APPLICATION->IncludeComponent(
 						"bitrix:menu", 
@@ -170,33 +170,33 @@ Loc::loadMessages(__FILE__);
 				</div>
 			</div>
 		</header>
-		<?if($APPLICATION->GetCurPage() == '/'):?>
+		<?if($APPLICATION->GetCurPage() == '/'):?> <!-- отображаем карусель --> 
 			<?$APPLICATION->IncludeComponent(
-	"custom:owlcarousel", 
-	"custom-template", 
-	array(
-		"COMPONENT_TEMPLATE" => "custom-template",
-		"JQUERY" => "N",
-		"COUNT_SLIDES" => "1",
-		"MARGIN" => "20",
-		"CONTROLS" => "true",
-		"PAGER" => "true",
-		"AUTO" => "false",
-		"LOOP" => "true",
-		"DATA_TYPE" => "FOLDER",
-		"FOLDER" => "/upload/images/",
-		"LINK" => "Y",
-		"NEW_WINDOW" => "N",
-		"IBLOCK_TYPE" => "news",
-		"IBLOCK_ID" => "1",
-		"COUNT" => "5",
-		"IMAGE" => "DETAIL",
-		"PROPERTY_CODE" => "",
-		"SORT_BY1" => "SORT",
-		"SORT_ORDER1" => "DESC"
-	),
-	false
-);?>		
+				"custom:owlcarousel", 
+				"custom-template", 
+				array(
+					"COMPONENT_TEMPLATE" => "custom-template",
+					"JQUERY" => "N",
+					"COUNT_SLIDES" => "1",
+					"MARGIN" => "20",
+					"CONTROLS" => "true",
+					"PAGER" => "true",
+					"AUTO" => "false",
+					"LOOP" => "true",
+					"DATA_TYPE" => "FOLDER",
+					"FOLDER" => "/upload/images/",
+					"LINK" => "Y",
+					"NEW_WINDOW" => "N",
+					"IBLOCK_TYPE" => "news",
+					"IBLOCK_ID" => "1",
+					"COUNT" => "5",
+					"IMAGE" => "DETAIL",
+					"PROPERTY_CODE" => "",
+					"SORT_BY1" => "SORT",
+					"SORT_ORDER1" => "DESC"
+				),
+				false
+			);?>		
 		<?endif;?>
 		<main class="content catalog-page">
 			<?if($APPLICATION->GetCurPage() != '/'):?>
@@ -213,13 +213,13 @@ Loc::loadMessages(__FILE__);
 			);?>
 			<?endif;?>
 			
-			<?if($APPLICATION->GetCurPage() == '/'):?>
+			<?if($APPLICATION->GetCurPage() == '/'):?> <!-- Для главной страницы -->
 				<div class="container">
 					<h1 class="heading"><span class="heading__text"><?$APPLICATION->ShowTitle(false);?></span></h1>
-			<?elseif(preg_match('/\/catalog\/[a-z0-9_-]+\/[a-z,0-9].+/',$APPLICATION->GetCurPage())):?>	
+			<?elseif(preg_match('/\/catalog\/[a-z0-9_-]+\/[a-z,0-9].+/',$APPLICATION->GetCurPage())):?>	 <!-- Для страницы детального просмотра товара убираем title-->
 				<div class="container">
 			<?else:?>
-				<div class="container">
+				<div class="container"> <!-- Для всех остальных страниц --> 
 					<h1 class="title"><?$APPLICATION->ShowTitle(false);?></h1>
 			<?endif;?>
 		

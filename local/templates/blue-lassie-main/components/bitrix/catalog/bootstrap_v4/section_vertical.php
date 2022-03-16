@@ -31,6 +31,7 @@ else
 }
 ?>
 <div class="catalog catalog-page__catalog">
+	
 	<? if ($isFilter || $isSidebar): ?>
 		
 			<?
@@ -106,7 +107,28 @@ else
 		
 
 		?>
-		<div class="catalog__main">
+	<div class="catalog__main">
+		<div class="catalog__sort" style="height:45px">
+			<div class="catalog__sort-group"><span class="catalog__sort-text text">Сортировать по:</span>
+				<select name="sort" class="js-select select">
+					<option value="popular">Популярности</option>
+					<option value="price">Цене</option>
+					<option value="new">Новизне</option>
+					<option value="availibel">Наличию</option>
+				</select>
+			</div>
+			<div class="catalog__sort-group" style="z-index: 250;"><span class="catalog__sort-text text">Отображать по:</span>
+				<select name="display" data-sort="true" class="js-select select" style="padding-left: 0;">
+					<option value="12">12</option>
+					<option value="9">9</option>
+					<option value="6">6</option>
+					<option value="3">3</option>
+				</select>
+			</div>
+		</div>
+		
+
+
 		<?
 		
 	 	 $intSectionID = $APPLICATION->IncludeComponent(

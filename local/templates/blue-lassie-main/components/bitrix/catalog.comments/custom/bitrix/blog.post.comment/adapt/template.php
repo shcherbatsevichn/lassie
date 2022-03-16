@@ -4,7 +4,6 @@
 /** @global array $arResult */
 CJSCore::Init(array("image"));
 
-//dump($arResult);
 $iblockId = (isset($_REQUEST['IBLOCK_ID']) && is_string($_REQUEST['IBLOCK_ID']) ? (int)$_REQUEST['IBLOCK_ID'] : 0);
 $elementId = (isset($_REQUEST['ELEMENT_ID']) && is_string($_REQUEST['ELEMENT_ID']) ? (int)$_REQUEST['ELEMENT_ID'] : 0);
 
@@ -340,8 +339,7 @@ else
 							<?
 						}
 						?>              <!--	Contetn parse area	 -->
-						<?if(preg_match( '/\|[0-5]/', $comment["TextFormated"]))
-						{	
+						<?
 							$fotmatText = explode('|',$comment["TextFormated"]);
 							$addClassArray = [
 								1 => '',
@@ -365,19 +363,8 @@ else
 								<p class="text"><?=$fotmatText[0]?></p>
 							</div>
 							<?
-						}
 						?>
-						
-						<?
-						if(!$fotmatText)
-						{
-							?>
-							<div class="review__message">
-								<p class="text"><?=$comment["TextFormated"]?></p>
-							</div>
-							<?
-						}
-						?>
+
 						<?
 						if(!empty($arParams["arImages"][$comment["ID"]]))
 						{
@@ -709,18 +696,18 @@ else
 			if($arResult["CanUserComment"])
 			{
 				?>
-
+				
 				<div id="form_comment_0">
 					<div id="err_comment_0"></div>
 					<div id="form_comment_0"></div>
 					<div id="new_comment_cont_0"></div>
 					<div id="new_comment_0" style="display:none;"></div>
 					<div class="reviews__own">
-					<article class="review-form">
-					<h3 class="title">Оставить отзыв</h3>
+					
 					<!--				placeholder for past editor					-->
+					
 					<div id="record-<?=$arParams["ENTITY_XML_ID"]?>-0-placeholder" class="blog-comment-edit feed-com-add-block blog-post-edit" style="display:none;"></div>
-					</article>
+					
 					</div>
 				</div>
 				<?
@@ -755,6 +742,8 @@ else
 				<?
 			}
 		}
+
+		// formtemplate
 		if($arResult["is_ajax_post"] != "Y" && $arResult["CanUserComment"])
 		{
 			/*$ajaxPath = POST_FORM_ACTION_URI;
@@ -770,6 +759,8 @@ else
 				
 				
 				<form method="POST" name="form_comment" id="<?=$component->createPostFormId()?>" action="<?=$ajaxPath; ?>">
+				<article class="review-form">
+					<h3 class="title">Оставить отзыв</h3>
 				<input type="hidden" name="parentId" id="parentId" value="">
 				<input type="hidden" name="edit_id" id="edit_id" value="">
 				<input type="hidden" name="act" id="act" value="add">
@@ -790,42 +781,43 @@ else
 					{
 						?>
 						<div class="blog-comment-field blog-comment-field-user" >
-						<div class="form__row">
-													<div class="form__col form__col_width_130">
-														<label class="form__label">Оцените товар</label>
-													</div>
-													<div class="form__col">
-														<div class="raiting">
-															<input id="raiting1-item5" name="Rating" type="radio" value="5" required class="raiting__check">
-															<label for="raiting1-item5" class="raiting__star raiting__star_choose">5 звезда</label>
-															<input id="raiting1-item4" name="Rating" type="radio" value="4" required class="raiting__check">
-															<label for="raiting1-item4" class="raiting__star raiting__star_choose">4 звезды</label>
-															<input id="raiting1-item3" name="Rating" type="radio" value="3" required class="raiting__check">
-															<label for="raiting1-item3" class="raiting__star raiting__star_choose">3 звезды</label>
-															<input id="raiting1-item2" name="Rating" type="radio" value="2" required class="raiting__check">
-															<label for="raiting1-item2" class="raiting__star raiting__star_choose">2 звезды</label>
-															<input id="raiting1-item1" name="Rating" type="radio" value="1" required class="raiting__check">
-															<label for="raiting1-item1" class="raiting__star raiting__star_choose">1 звёзд</label>
-														</div>
-													</div>
-												</div>
-								<div class="form__row">
-									<div class="form__col form__col_width_130">
-										<label for="user_name" class="form__label"><?=GetMessage("B_B_MS_NAME")?></label>
-									</div>
-										<div class="form__col form__col_width_260">
-											<input name="user_name" id="user_name" value="<?=htmlspecialcharsEx($_SESSION["blog_user_name"])?>" tabindex="3" required class="input" type="text">
-										</div>
-									</div>
-								<div class="form__row">
-									<div class="form__col form__col_width_130">
-										<label for="user_email" class="form__label">Электронная почта</label>
-									</div>
-									<div class="form__col form__col_width_260">
-										<input name="user_email" id="user_email" value="<?=htmlspecialcharsEx($_SESSION["blog_user_email"])?>"  tabindex="4" type="email" required class="input">
+							<div class="form__row">
+								
+								<div class="form__col form__col_width_130">
+									<label class="form__label">Оцените товар</label>
+								</div>
+								<div class="form__col">
+									<div class="raiting" >
+										<input id="raiting1-item5" name="Rating" type="radio" value="5" required class="raiting__check" data-valide-rating="true">
+										<label for="raiting1-item5" class="raiting__star raiting__star_choose">5 звезда</label>
+										<input id="raiting1-item4" name="Rating" type="radio" value="4" required class="raiting__check" data-valide-rating="true">
+										<label for="raiting1-item4" class="raiting__star raiting__star_choose">4 звезды</label>
+										<input id="raiting1-item3" name="Rating" type="radio" value="3" required class="raiting__check" data-valide-rating="true">
+										<label for="raiting1-item3" class="raiting__star raiting__star_choose">3 звезды</label>
+										<input id="raiting1-item2" name="Rating" type="radio" value="2" required class="raiting__check" data-valide-rating="true">
+										<label for="raiting1-item2" class="raiting__star raiting__star_choose">2 звезды</label>
+										<input id="raiting1-item1" name="Rating" type="radio" value="1" required class="raiting__check" data-valide-rating="true">
+										<label for="raiting1-item1" class="raiting__star raiting__star_choose">1 звёзд</label>
 									</div>
 								</div>
-							<div class="blog-clear-float"></div>
+							</div>
+							<div class="form__row">
+								<div class="form__col form__col_width_130">
+									<label for="user_name" class="form__label"><?=GetMessage("B_B_MS_NAME")?></label>
+								</div>
+									<div class="form__col form__col_width_260">
+										<input name="user_name" id="user_name" value="<?=htmlspecialcharsEx($_SESSION["blog_user_name"])?>" tabindex="3" required class="input" data-valide-name="true" type="text">
+									</div>
+								</div>
+							<div class="form__row">
+										<div class="form__col form__col_width_130">
+											<label for="user_email" class="form__label">Электронная почта</label>
+										</div>
+										<div class="form__col form__col_width_260">
+											<input name="user_email" id="user_email" value="<?=htmlspecialcharsEx($_SESSION["blog_user_email"])?>"  tabindex="4" type="email"  required class="input" data-valide-email="true">
+										</div>
+									</div>
+								<div class="blog-clear-float"></div>
 						</div>
 						<?
 					}
@@ -846,7 +838,7 @@ else
 						<div class="form__col form__col_width_130">
 							<label for="review-message" class="form__label">Ваше сообщение</label>
 						</div>
-						<div class="form__col form__col_width_400">
+						<div class="form__col form__col_width_400" data-mes-error-node="true">
 							<?
 							include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/neweditor.php");
 							?>
@@ -894,7 +886,7 @@ else
 							</div>
 							<div class="form__col form__col_width_130">
 								<input type="hidden" name="captcha_code" id="captcha_code" value="<?=$arResult["CaptchaCode"]?>">
-								<input type="text" name="captcha_word" id="captcha_word" value=""  tabindex="7" required class="input"><a href="javascript:void(0);" class="link review-form__refresh-captcha text">Обновить картинку</a>
+								<input type="text" name="captcha_word" id="captcha_word" value=""  tabindex="7" required data-valide-capcha="true" class="input"><a href="javascript:void(0);" onclick="Rebutcapcha('0', <?=$arParams['ID']?>)" class="link review-form__refresh-captcha text">Обновить картинку</a>
 							</div>
 							<div id="form__col form__col_width_130">
 								<img src=""  id="captcha">
@@ -929,7 +921,7 @@ else
 					?>
 				<div class="form__row review-form__btn-row">
 					<div class="form__col form__col_width_280">
-						<input tabindex="10" style="padding-top:0; padding-bottom:0;" class="btn review-form__submit" value="<?=GetMessage("B_B_MS_SEND_CUSTOM")?>" type="button" name="sub-post" id="post-button" onclick="submitCommentNew()">
+						<input tabindex="10" style="padding-top:0; padding-bottom:0;" class="btn review-form__submit" value="<?=GetMessage("B_B_MS_SEND_CUSTOM")?>" type="button" name="sub-post" id="post-button" onclick="submitCommentNew();">
 					</div>
 					<div class="form__col review-form__reset-col">
 						<button type="reset" class="form__reset link text">Очистить форму</button>
@@ -937,8 +929,9 @@ else
 				</div>
 				</div>
 				<input type="hidden" name="blog_upload_cid" id="upload-cid" value="">
+				</article>
 				</form>
-
+			
 				
 			</div>
 			</div>

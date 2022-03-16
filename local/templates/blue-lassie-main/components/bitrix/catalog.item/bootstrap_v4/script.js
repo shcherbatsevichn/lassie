@@ -461,12 +461,12 @@
 
 				if (this.visual.QUANTITY_UP_ID)
 				{
-					this.obQuantityUp = BX(this.visual.QUANTITY_UP_ID);
+					//this.obQuantityUp = BX(this.visual.QUANTITY_UP_ID);
 				}
 
 				if (this.visual.QUANTITY_DOWN_ID)
 				{
-					this.obQuantityDown = BX(this.visual.QUANTITY_DOWN_ID);
+					//this.obQuantityDown = BX(this.visual.QUANTITY_DOWN_ID);
 				}
 			}
 

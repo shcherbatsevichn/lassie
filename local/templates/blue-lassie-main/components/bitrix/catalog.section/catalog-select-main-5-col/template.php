@@ -22,6 +22,7 @@ use \Bitrix\Main\Localization\Loc;
 
 $this->setFrameMode(true);
 
+
 if (!empty($arResult['NAV_RESULT']))
 {
 	$navParams =  array(
@@ -187,7 +188,7 @@ $themeClass = isset($arParams['TEMPLATE_THEME']) ? ' bx-'.$arParams['TEMPLATE_TH
 		<?
 	}
 	//endregion
-
+	$rowCount = 2; // регулируем количество выводимых строк
 	?>
 		<div class="" data-entity="<?=$containerName?>">
 		<ul class="goods">
@@ -196,27 +197,36 @@ $themeClass = isset($arParams['TEMPLATE_THEME']) ? ' bx-'.$arParams['TEMPLATE_TH
 			if (!empty($arResult['ITEMS']) && !empty($arResult['ITEM_ROWS']))
 			{
 				$areaIds = array();
-
+				
 				foreach ($arResult['ITEMS'] as $item)
 				{
+					
+					
 					$uniqueId = $item['ID'].'_'.md5($this->randString().$component->getAction());
 					$areaIds[$item['ID']] = $this->GetEditAreaId($uniqueId);
 					$this->AddEditAction($uniqueId, $item['EDIT_LINK'], $elementEdit);
 					$this->AddDeleteAction($uniqueId, $item['DELETE_LINK'], $elementDelete, $elementDeleteParams);
 				}
-					
+					$counterRow = 0;
 					foreach ($arResult['ITEM_ROWS'] as $rowData)
-					{
+					{	
+						
+						if($counterRow >= $rowCount){
+						break;
+						}
+						$counterRow++;
+					
 						$rowItems = array_splice($arResult['ITEMS'], 0, 5);
 						
 						?>
 						
 							<?
+							
 								foreach ($rowItems as $item)
 								{
 								?>
 								<li class="goods__item">
-									
+									<?=$counter;?>
 										<?
 										$APPLICATION->IncludeComponent(
 											'bitrix:catalog.item',

@@ -156,6 +156,8 @@ window.FCForm.prototype = {
 
 		return true;
 	},
+
+
 	submit : function() {
 		if (this.busy === true)
 			return 'busy';
@@ -174,8 +176,13 @@ window.FCForm.prototype = {
 
 		var post_data = {};
 		window.convertFormToArray(this.form, post_data);
-		alert('print');
-		console.log(post_data);
+		if(post_data['comment'] == '')
+		{	
+			BX.closeWait(this.eventNode);
+			window.validMessage();
+			return false;
+		}
+		
 		post_data['REVIEW_TEXT'] = text;
 		post_data['NOREDIRECT'] = "Y";
 		post_data['MODE'] = "RECORD";
@@ -264,6 +271,7 @@ window.FCForm.prototype = {
 				this.busy = false;
  			}, this)
 		});
+		window.editCommentNew('0', post_data.comment_post_id);
 	},
 	checkConsent: function() {
 //		consent was set previously
@@ -403,6 +411,25 @@ window.editCommentNew = function(key, postId)
 	BX.onCustomEvent(window, 'OnUCAfterRecordEdit', ['BLOG_' + postId, key, data, 'EDIT']);
 };
 
+window.Rebutcapcha = function(key, postId)
+{
+	
+	var data = {
+		messageBBCode : top["text"+key],
+		messageTitle : top["title"+key],
+		messageFields : {
+			arImages : top["arImages"],
+			arDocs : top["arComDocs"+key],
+			arFiles : top["<?=$component->createEditorId()?>Files"],
+			arDFiles : top["arComDFiles"+key],
+			UrlPreview : top["UrlPreview"+key]}
+	};
+
+	BX.onCustomEvent(window, 'OnUCAfterRecordEdit', ['BLOG_' + postId, key, data, 'EDIT']);
+};
+
+
+
 window.replyCommentNew = function(key, postId)
 {
 //	arImage and arFiles nod need already, this is null
@@ -424,9 +451,173 @@ window.submitCommentNew = function()
 	<?if ($arResult['userID'] == NULL && $arParams['USER_CONSENT'] == 'Y'):?>
 		window["UC"]["f<?=$component->createPostFormId()?>"].checkConsent();
 	<?else:?>
-		window["UC"]["f<?=$component->createPostFormId()?>"].submit();
+		if(window.formValid())
+		{
+			window["UC"]["f<?=$component->createPostFormId()?>"].submit();
+		}
 	<?endif;?>
 };
+//-------------------------------Validation block-----------------------------------------------------------------
+//----------------------------Validator---------------------
+window.formValid = function()          
+{
+	var validName = window.validName(), validRating = window.validRating(), validEmail = window.validEmail(), validCapcha = window.validCapcha();
+	if( validName && validRating && validEmail && validCapcha){
+		return true;
+	}
+
+}
+//----------------------------Valid Rating--------------------------------
+window.validRating = function()
+{
+	window.remoweRatingError();
+	var inputRating = document.querySelectorAll('input[data-valide-rating]');
+	var inputRatingcheck = false ;
+	inputRating.forEach(function(item, i, arr){
+		if(item.checked)
+		{
+			inputRatingcheck = true;
+		}
+	});
+	if(!inputRatingcheck)
+	{
+		//inputRating.classList.add("invalid")
+		var errorRatingNode = BX.create('div', {
+				attrs : {"class": "form__error-wrapper", "data-rating-error": "true"},
+				html: '<label id="Review[raiting]-error" class="form__error" for="Review[raiting]" style="display: inline;">Пожалуйста, поставьте оценку товару</label><span class="form__error-hide" onclick="remoweRatingError()"></span></div>'
+			});
+		inputRating[0].after(errorRatingNode);
+	}
+	return inputRatingcheck;
+}
+
+window.remoweRatingError = function()
+{
+	var errorNode = document.querySelector('div[data-rating-error]');
+	BX.remove(errorNode);	
+}
+
+//--------------------------------Valid Name-----------------------------------------------
+
+window.validName = function()
+{
+	window.remoweNameError();
+	var inputName = document.querySelector('input[data-valide-name]');
+	var inputNamecheck = false;
+	if(inputName.value)
+	{
+		inputNamecheck = true;
+	}
+	if(!inputNamecheck)
+	{
+		inputName.classList.add("invalid");
+		var errorNameNode = BX.create('div', {
+				attrs : {"class": "form__error-wrapper", "data-name-error": "true"},
+				html: '<label id="Review[raiting]-error" class="form__error" for="Review[raiting]" style="display: inline;">Пожайлуйста, заполните это поле</label><span class="form__error-hide" onclick="remoweNameError()"></span></div>'
+			});
+			inputName.after(errorNameNode);
+	}
+	return inputNamecheck;
+}
+
+window.remoweNameError = function()
+{
+	var errorNode = document.querySelector('div[data-name-error]'), inputNode = document.querySelector('input[data-valide-name]');
+	inputNode.classList.remove("invalid")
+	BX.remove(errorNode);	
+}
+
+//--------------------------------------------------Valid Email ----------------------------------------
+
+window.validEmail = function()
+{
+	window.remoweEmailError();
+	var inputEmail = document.querySelector('input[data-valide-email]');
+	var inputEmailcheck = false;
+	if(inputEmail.value)
+	{
+		inputEmailcheck = true;
+	}
+	if(!inputEmailcheck)
+	{
+		inputEmail.classList.add("invalid");
+		var errorEmailNode = BX.create('div', {
+				attrs : {"class": "form__error-wrapper", "data-email-error": "true"},
+				html: '<label id="Review[raiting]-error" class="form__error" for="Review[raiting]" style="display: inline;">Пожайлуйста, заполните это поле</label><span class="form__error-hide" onclick="remoweEmailError()"></span></div>'
+			});
+			inputEmail.after(errorEmailNode);
+	}
+	return inputEmailcheck;
+}
+
+window.remoweEmailError = function()
+{
+	var errorNode = document.querySelector('div[data-email-error]'), inputNode = document.querySelector('input[data-valide-email]');
+	inputNode.classList.remove("invalid")
+	BX.remove(errorNode);	
+}
+
+//---------------------------------------------------Valid capcha ------------------------------------
+
+window.validCapcha = function()
+{
+	window.remoweCapchaError();
+	var inputCapcha = document.querySelector('input[data-valide-capcha]');
+	var inputCapchacheck = false;
+	if(inputCapcha.value)
+	{
+		inputCapchacheck = true;
+	}
+	if(!inputCapchacheck)
+	{
+		inputCapcha.classList.add("invalid");
+		var errorCapchaNode = BX.create('div', {
+				attrs : {"class": "form__error-wrapper", "data-capcha-error": "true"},
+				html: '<label id="Review[raiting]-error" class="form__error" for="Review[raiting]" style="display: inline;">Пожайлуйста, заполните это поле</label><span class="form__error-hide" onclick="remoweCapchaError()"></span></div>'
+			});
+			inputCapcha.after(errorCapchaNode);
+	}
+	return inputCapchacheck;
+}
+
+window.remoweCapchaError = function()
+{
+	var errorNode = document.querySelector('div[data-capcha-error]'), inputNode = document.querySelector('input[data-valide-capcha]');
+	inputNode.classList.remove("invalid")
+	BX.remove(errorNode);	
+}
+
+//-----------------------------------------Valid message ----------------------------------------------
+
+window.validMessage = function()
+{
+	window.remoweMessageError();
+	var inputMessage = document.querySelector('iframe');
+	var inputMessagecheck = false;
+	if(inputMessage.value)
+	{
+		inputMessagecheck = true;
+	}
+	if(!inputMessagecheck)
+	{
+		inputMessage.setAttribute("style", "border: 3px solid #e2003b;");
+		var errorAddNode = document.querySelector('div[data-mes-error-node]');
+		var errorMessageNode = BX.create('div', {
+				attrs : {"class": "form__error-wrapper", "data-message-error": "true"},
+				html: '<label id="Review[raiting]-error" class="form__error" for="Review[raiting]" style="display: inline;">Пожайлуйста, заполните это поле</label><span class="form__error-hide" onclick="remoweMessageError()"></span></div>'
+			});
+			errorAddNode.appendChild(errorMessageNode);
+	}
+	return inputMessagecheck;
+}
+
+window.remoweMessageError = function()
+{
+	var errorNode = document.querySelector('div[data-message-error]'), inputNode = document.querySelector('iframe');
+	inputNode.removeAttribute("style");
+	inputNode.setAttribute("style", "border: 1px solid #e1e1e1; width: 100%; height: 80px; font-size: .8125rem;");
+	BX.remove(errorNode);	
+}
 
 window.cancelComment = function()
 {

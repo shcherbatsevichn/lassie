@@ -1,11 +1,17 @@
 <?
 define("HIDE_SIDEBAR", true);
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+if(!preg_match('/\/catalog\/[a-z0-9_-]+\/[a-z,0-9].+/',$APPLICATION->GetCurPage())){  //don't show on detail product page
+?>
+<p>
+<?
 $APPLICATION->SetTitle("");?><p data-block="0" class="catalog-page__text">
 	 <?=$APPLICATION->ShowProperty("PAGE_DESCRIPTION")?>
 </p>
  <a href="javascript:void(0);" data-btn="0" data-text="Скрыть текст" class="js-block-show link text">Читать далее</a><a href="javascript:void(0);" data-btn="1" data-text="Скрыть фильтр" class="js-block-show link text">Показать фильтр</a>
-<?$APPLICATION->IncludeComponent(
+<?
+}
+$APPLICATION->IncludeComponent(
 	"bitrix:catalog", 
 	"bootstrap_v4", 
 	array(

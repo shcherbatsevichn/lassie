@@ -6,7 +6,7 @@ global $trendFilter;
 $trendFilter = array('PROPERTY_TREND' => '4');
 ?>
 <?$APPLICATION->IncludeComponent(
-	"custom:catalog.section", 
+	"bitrix:catalog.section", 
 	"catalog-select-main-5-col", 
 	array(
 		"ACTION_VARIABLE" => "action",
@@ -92,6 +92,7 @@ $trendFilter = array('PROPERTY_TREND' => '4');
 		"OFFERS_SORT_FIELD2" => "id",
 		"OFFERS_SORT_ORDER" => "desc",
 		"OFFERS_SORT_ORDER2" => "desc",
+		"OFFERS_LIMIT" => '10',
 		"OFFER_ADD_PICT_PROP" => "-",
 		"OFFER_TREE_PROPS" => array(
 			0 => "COLOR_REF",
@@ -105,7 +106,7 @@ $trendFilter = array('PROPERTY_TREND' => '4');
 		"PAGER_SHOW_ALWAYS" => "N",
 		"PAGER_TEMPLATE" => "bootstrap_v4",
 		"PAGER_TITLE" => "Товары",
-		"PAGE_ELEMENT_COUNT" => "0",
+		"PAGE_ELEMENT_COUNT" => 10,
 		"PARTIAL_PRODUCT_PROPERTIES" => "N",
 		"PRICE_CODE" => array(
 			0 => "BASE",
