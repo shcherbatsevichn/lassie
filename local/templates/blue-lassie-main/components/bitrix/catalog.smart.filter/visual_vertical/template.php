@@ -526,6 +526,9 @@ $templateData = array(
 								<div class="range-slider">
 									<input class="range-slider__elem" type="text">
 									<div class="range-slider__output-row">
+									<script>
+									console.log("");
+									</script>
 									<input
 											class="input range-slider__output"
 											type="text"

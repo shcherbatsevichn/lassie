@@ -243,9 +243,16 @@ $themeClass = isset($arParams['TEMPLATE_THEME']) ? ' bx-'.$arParams['TEMPLATE_TH
 										?>
 									
 									</li>
-								<?
-								}
+									<?
 								
+								}
+								if(count($rowItems) <= 11)
+									{?>
+                                        <li class="goods__item" style="margin-bottom: 25px;" data-entity="items-row">
+                                        </li>
+                                        <li class="goods__item" style="margin-bottom: 25px;" data-entity="items-row">
+                                        </li>
+									<?}
 					}
 					?>
 					

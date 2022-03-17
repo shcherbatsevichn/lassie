@@ -97,7 +97,10 @@ foreach($arResult as $arItem):?>
 </button>
 	<div class="navigation__collapse">
 		<ul class="navigation__collapse-menu vertical-menu">
-			<?foreach($arResult as $arItem):?>
+			<?
+            $arCollapsMenu = array_reverse($arResult);
+			
+			foreach($arCollapsMenu as $arItem):?>
 				<?if ($arItem["DEPTH_LEVEL"] == 1):?>
 					<li class="navigation__collapse-item vertical-menu__item"><a href="<?=$arItem["LINK"]?>" class="vertical-menu__name"><?=$arItem["TEXT"]?></a>
 								</li>

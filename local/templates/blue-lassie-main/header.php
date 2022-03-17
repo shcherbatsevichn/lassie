@@ -223,4 +223,6 @@ Loc::loadMessages(__FILE__);
 					<h1 class="title"><?$APPLICATION->ShowTitle(false);?></h1>
 			<?endif;?>
 		
+  
+		
 				

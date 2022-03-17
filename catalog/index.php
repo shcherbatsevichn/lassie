@@ -302,6 +302,7 @@ $APPLICATION->IncludeComponent(
 		"USE_STORE" => "Y",
 		"SEF_URL_TEMPLATES" => array(
 			"sections" => "",
+			"nikita" => "nikita/",
 			"section" => "#SECTION_CODE#/",
 			"element" => "#SECTION_CODE#/#ELEMENT_CODE#/",
 			"compare" => "compare/",
