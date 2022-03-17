@@ -462,6 +462,8 @@ window.submitCommentNew = function()
 window.formValid = function()          
 {
 	var validName = window.validName(), validRating = window.validRating(), validEmail = window.validEmail(), validCapcha = window.validCapcha();
+	
+    console.log(window["UC"]);
 	if( validName && validRating && validEmail && validCapcha){
 		return true;
 	}
@@ -497,6 +499,18 @@ window.remoweRatingError = function()
 	BX.remove(errorNode);	
 }
 
+window.changeStatusRating = function()
+{   
+    var errorNode = document.querySelector('div[data-rating-error]');
+    
+    if(errorNode)
+    {
+        window.remoweRatingError();
+        erroNode.classList.add('valid');
+    }
+   
+}
+
 //--------------------------------Valid Name-----------------------------------------------
 
 window.validName = function()
@@ -524,10 +538,22 @@ window.validName = function()
 
 window.remoweNameError = function()
 {
-	var errorNode = document.querySelector('div[data-name-error]'), inputNode = document.querySelector('input[data-valide-name]'), lableName = document.querySelector('label[lable-valide-name]');
+	var errorNode = document.querySelector('div[data-name-error]'), inputNode = document.querySelector('input[data-valide-name]'), labelNode = document.querySelector('label[lable-valide-name]');
 	inputNode.classList.remove("invalid");
-	lableName.classList.remove("form__label_invalid");
+	labelNode.classList.remove("form__label_invalid");
 	BX.remove(errorNode);	
+}
+
+window.changeStatusName = function()
+{   
+    var errorNode = document.querySelector('div[data-name-error]'), inputNode = document.querySelector('input[data-valide-name]'), labelNode = document.querySelector('label[lable-valide-name]');
+    if(errorNode)
+    {
+        window.remoweNameError();
+        inputNode.classList.add('valid');
+        labelNode.classList.add('form__label_valid');
+    }
+   
 }
 
 //--------------------------------------------------Valid Email ----------------------------------------
@@ -557,12 +583,23 @@ window.validEmail = function()
 
 window.remoweEmailError = function()
 {
-	var errorNode = document.querySelector('div[data-email-error]'), inputNode = document.querySelector('input[data-valide-email]'), labelEmail = document.querySelector('label[lable-valide-email]');
+	var errorNode = document.querySelector('div[data-email-error]'), inputNode = document.querySelector('input[data-valide-email]'), labelNode = document.querySelector('label[lable-valide-email]');
 	inputNode.classList.remove("invalid");
-    labelEmail.classList.remove("form__label_invalid");
+    labelNode.classList.remove("form__label_invalid");
 	BX.remove(errorNode);	
 }
 
+window.changeStatusEmail = function()
+{   
+    var errorNode = document.querySelector('div[data-email-error]'), inputNode = document.querySelector('input[data-valide-email]'), labelNode = document.querySelector('label[lable-valide-email]');
+    if(errorNode)
+    {
+        window.remoweEmailError();
+        inputNode.classList.add('valid');
+        labelNode.classList.add('form__label_valid');
+    }
+   
+}
 //---------------------------------------------------Valid capcha ------------------------------------
 
 window.validCapcha = function()
@@ -597,6 +634,18 @@ window.remoweCapchaError = function()
 	BX.remove(errorNode);	
 }
 
+window.changeStatusCapcha = function()
+{   
+    var errorNode = document.querySelector('div[data-email-error]'), inputNode = document.querySelector('input[data-valide-email]'), labelNode = document.querySelector('label[lable-valide-email]');
+    if(errorNode)
+    {
+        window.remoweCapchaError();
+        inputNode.classList.add('valid');
+        labelNode.classList.add('form__label_valid');
+    }
+   
+}
+
 //-----------------------------------------Valid message ----------------------------------------------
 
 window.validMessage = function()
@@ -604,13 +653,8 @@ window.validMessage = function()
 	window.remoweMessageError();
 	var inputMessage = document.querySelector('iframe');
 	var inputMessagecheck = false;
-	if(inputMessage.value)
-	{
-		inputMessagecheck = true;
-	}
-	if(!inputMessagecheck)
-	{
-	var lableMessage = document.querySelector('label[lable-valide-message]');
+	
+        var lableMessage = document.querySelector('label[lable-valide-message]');
         lableMessage.classList.add("form__label_invalid");
 		inputMessage.setAttribute("style", "border: 3px solid #e2003b;");
 		var errorAddNode = document.querySelector('div[data-mes-error-node]');
@@ -619,7 +663,6 @@ window.validMessage = function()
 				html: '<label id="Review[raiting]-error" class="form__error" for="Review[raiting]" style="display: inline;">Пожайлуйста, заполните это поле</label><span class="form__error-hide" onclick="remoweMessageError()"></span></div>'
 			});
 			errorAddNode.appendChild(errorMessageNode);
-	}
 	return inputMessagecheck;
 }
 

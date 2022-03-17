@@ -788,15 +788,15 @@ else
 								</div>
 								<div class="form__col">
 									<div class="raiting" >
-										<input id="raiting1-item5" name="Rating" type="radio" value="5" required class="raiting__check" data-valide-rating="true">
+										<input id="raiting1-item5" name="Rating" type="radio" value="5" required class="raiting__check" data-valide-rating="true" onchange="changeStatusRating()">
 										<label for="raiting1-item5" class="raiting__star raiting__star_choose">5 звезда</label>
-										<input id="raiting1-item4" name="Rating" type="radio" value="4" required class="raiting__check" data-valide-rating="true">
+										<input id="raiting1-item4" name="Rating" type="radio" value="4" required class="raiting__check" data-valide-rating="true" onchange="changeStatusRating()">
 										<label for="raiting1-item4" class="raiting__star raiting__star_choose">4 звезды</label>
-										<input id="raiting1-item3" name="Rating" type="radio" value="3" required class="raiting__check" data-valide-rating="true">
+										<input id="raiting1-item3" name="Rating" type="radio" value="3" required class="raiting__check" data-valide-rating="true" onchange="changeStatusRating()">
 										<label for="raiting1-item3" class="raiting__star raiting__star_choose">3 звезды</label>
-										<input id="raiting1-item2" name="Rating" type="radio" value="2" required class="raiting__check" data-valide-rating="true">
+										<input id="raiting1-item2" name="Rating" type="radio" value="2" required class="raiting__check" data-valide-rating="true" onchange="changeStatusRating()">
 										<label for="raiting1-item2" class="raiting__star raiting__star_choose">2 звезды</label>
-										<input id="raiting1-item1" name="Rating" type="radio" value="1" required class="raiting__check" data-valide-rating="true">
+										<input id="raiting1-item1" name="Rating" type="radio" value="1" required class="raiting__check" data-valide-rating="true" onchange="changeStatusRating()">
 										<label for="raiting1-item1" class="raiting__star raiting__star_choose">1 звёзд</label>
 									</div>
 								</div>
@@ -806,7 +806,7 @@ else
 									<label for="user_name" class="form__label" lable-valide-name="true"><?=GetMessage("B_B_MS_NAME")?></label>
 								</div>
 									<div class="form__col form__col_width_260">
-										<input name="user_name" id="user_name" value="<?=htmlspecialcharsEx($_SESSION["blog_user_name"])?>" tabindex="3" required class="input" data-valide-name="true" type="text">
+										<input name="user_name" id="user_name" value="<?=htmlspecialcharsEx($_SESSION["blog_user_name"])?>" tabindex="3" required class="input" data-valide-name="true" onchange="changeStatusName()" type="text">
 									</div>
 								</div>
 							<div class="form__row">
@@ -814,7 +814,7 @@ else
 											<label for="user_email" class="form__label" lable-valide-email="true">Электронная почта</label>
 										</div>
 										<div class="form__col form__col_width_260">
-											<input name="user_email" id="user_email" value="<?=htmlspecialcharsEx($_SESSION["blog_user_email"])?>"  tabindex="4" type="email"  required class="input" data-valide-email="true">
+											<input name="user_email" id="user_email" value="<?=htmlspecialcharsEx($_SESSION["blog_user_email"])?>"  tabindex="4" type="email"  required class="input" data-valide-email="true" onchange="changeStatusEmail()">
 										</div>
 									</div>
 								<div class="blog-clear-float"></div>
@@ -886,7 +886,7 @@ else
 							</div>
 							<div class="form__col form__col_width_130">
 								<input type="hidden" name="captcha_code" id="captcha_code" value="<?=$arResult["CaptchaCode"]?>">
-								<input type="text" name="captcha_word" id="captcha_word" value=""  tabindex="7" required data-valide-capcha="true" class="input"><a href="javascript:void(0);" onclick="Rebutcapcha('0', <?=$arParams['ID']?>)" class="link review-form__refresh-captcha text">Обновить картинку</a>
+								<input type="text" name="captcha_word" id="captcha_word" value=""  tabindex="7" required data-valide-capcha="true" class="input" onchange="changeStatusCapcha()"><a href="javascript:void(0);" onclick="Rebutcapcha('0', <?=$arParams['ID']?>)" class="link review-form__refresh-captcha text">Обновить картинку</a>
 							</div>
 							<div id="form__col form__col_width_130">
 								<img src=""  id="captcha">
