@@ -510,6 +510,8 @@ window.validName = function()
 	}
 	if(!inputNamecheck)
 	{
+        var lableName = document.querySelector('label[lable-valide-name]');
+        lableName.classList.add("form__label_invalid");
 		inputName.classList.add("invalid");
 		var errorNameNode = BX.create('div', {
 				attrs : {"class": "form__error-wrapper", "data-name-error": "true"},
@@ -522,8 +524,9 @@ window.validName = function()
 
 window.remoweNameError = function()
 {
-	var errorNode = document.querySelector('div[data-name-error]'), inputNode = document.querySelector('input[data-valide-name]');
-	inputNode.classList.remove("invalid")
+	var errorNode = document.querySelector('div[data-name-error]'), inputNode = document.querySelector('input[data-valide-name]'), lableName = document.querySelector('label[lable-valide-name]');
+	inputNode.classList.remove("invalid");
+	lableName.classList.remove("form__label_invalid");
 	BX.remove(errorNode);	
 }
 
@@ -540,6 +543,8 @@ window.validEmail = function()
 	}
 	if(!inputEmailcheck)
 	{
+	var labelEmail = document.querySelector('label[lable-valide-email]');
+        labelEmail.classList.add("form__label_invalid");
 		inputEmail.classList.add("invalid");
 		var errorEmailNode = BX.create('div', {
 				attrs : {"class": "form__error-wrapper", "data-email-error": "true"},
@@ -552,8 +557,9 @@ window.validEmail = function()
 
 window.remoweEmailError = function()
 {
-	var errorNode = document.querySelector('div[data-email-error]'), inputNode = document.querySelector('input[data-valide-email]');
-	inputNode.classList.remove("invalid")
+	var errorNode = document.querySelector('div[data-email-error]'), inputNode = document.querySelector('input[data-valide-email]'), labelEmail = document.querySelector('label[lable-valide-email]');
+	inputNode.classList.remove("invalid");
+    labelEmail.classList.remove("form__label_invalid");
 	BX.remove(errorNode);	
 }
 
@@ -570,6 +576,8 @@ window.validCapcha = function()
 	}
 	if(!inputCapchacheck)
 	{
+        var lableCapcha = document.querySelector('label[lable-valide-capcha]');
+        lableCapcha.classList.add("form__label_invalid");
 		inputCapcha.classList.add("invalid");
 		var errorCapchaNode = BX.create('div', {
 				attrs : {"class": "form__error-wrapper", "data-capcha-error": "true"},
@@ -583,6 +591,8 @@ window.validCapcha = function()
 window.remoweCapchaError = function()
 {
 	var errorNode = document.querySelector('div[data-capcha-error]'), inputNode = document.querySelector('input[data-valide-capcha]');
+	var lableCapcha = document.querySelector('label[lable-valide-capcha]');
+	lableCapcha.classList.remove("form__label_invalid");
 	inputNode.classList.remove("invalid")
 	BX.remove(errorNode);	
 }
@@ -600,6 +610,8 @@ window.validMessage = function()
 	}
 	if(!inputMessagecheck)
 	{
+	var lableMessage = document.querySelector('label[lable-valide-message]');
+        lableMessage.classList.add("form__label_invalid");
 		inputMessage.setAttribute("style", "border: 3px solid #e2003b;");
 		var errorAddNode = document.querySelector('div[data-mes-error-node]');
 		var errorMessageNode = BX.create('div', {
@@ -613,6 +625,8 @@ window.validMessage = function()
 
 window.remoweMessageError = function()
 {
+    var lableMessage = document.querySelector('label[lable-valide-message]');
+    lableMessage.classList.remove("form__label_invalid");
 	var errorNode = document.querySelector('div[data-message-error]'), inputNode = document.querySelector('iframe');
 	inputNode.removeAttribute("style");
 	inputNode.setAttribute("style", "border: 1px solid #e1e1e1; width: 100%; height: 80px; font-size: .8125rem;");

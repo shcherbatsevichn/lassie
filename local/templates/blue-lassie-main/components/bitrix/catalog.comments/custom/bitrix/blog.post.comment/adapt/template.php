@@ -439,7 +439,7 @@ else
 						{
 							?>
 							<span class="blog-vert-separator"></span>
-							<span class="blog-comment-show">
+							<span class="blog-commВаше имяent-show">
 								<?if($arParams["AJAX_POST"] == "Y"):?>
 									<a href="javascript:void(0)" onclick="return hideShowComment('<?=$comment['urlToShow']."&".bitrix_sessid_get()?>', '<?=$comment["ID"]?>');" title="<?=GetMessage("BPC_MES_SHOW")?>">
 								<?else:?>
@@ -784,7 +784,7 @@ else
 							<div class="form__row">
 								
 								<div class="form__col form__col_width_130">
-									<label class="form__label">Оцените товар</label>
+									<label class="form__label" lable-valide-rating="true">Оцените товар</label>
 								</div>
 								<div class="form__col">
 									<div class="raiting" >
@@ -803,7 +803,7 @@ else
 							</div>
 							<div class="form__row">
 								<div class="form__col form__col_width_130">
-									<label for="user_name" class="form__label"><?=GetMessage("B_B_MS_NAME")?></label>
+									<label for="user_name" class="form__label" lable-valide-name="true"><?=GetMessage("B_B_MS_NAME")?></label>
 								</div>
 									<div class="form__col form__col_width_260">
 										<input name="user_name" id="user_name" value="<?=htmlspecialcharsEx($_SESSION["blog_user_name"])?>" tabindex="3" required class="input" data-valide-name="true" type="text">
@@ -811,7 +811,7 @@ else
 								</div>
 							<div class="form__row">
 										<div class="form__col form__col_width_130">
-											<label for="user_email" class="form__label">Электронная почта</label>
+											<label for="user_email" class="form__label" lable-valide-email="true">Электронная почта</label>
 										</div>
 										<div class="form__col form__col_width_260">
 											<input name="user_email" id="user_email" value="<?=htmlspecialcharsEx($_SESSION["blog_user_email"])?>"  tabindex="4" type="email"  required class="input" data-valide-email="true">
@@ -836,7 +836,7 @@ else
 					}?>
 					<div class="form__row">
 						<div class="form__col form__col_width_130">
-							<label for="review-message" class="form__label">Ваше сообщение</label>
+							<label for="review-message" class="form__label" lable-valide-message="true">Ваше сообщение</label>
 						</div>
 						<div class="form__col form__col_width_400" data-mes-error-node="true">
 							<?
@@ -882,7 +882,7 @@ else
 
 						<div class="form__row review-form__antispam-row">
 							<div class="form__col form__col_width_130">
-								<label for="" class="form__label"><?=GetMessage("B_B_MS_CAPTCHA_SYM_CUSTOM")?></label>
+								<label for="" class="form__label" lable-valide-capcha="true"><?=GetMessage("B_B_MS_CAPTCHA_SYM_CUSTOM")?></label>
 							</div>
 							<div class="form__col form__col_width_130">
 								<input type="hidden" name="captcha_code" id="captcha_code" value="<?=$arResult["CaptchaCode"]?>">
