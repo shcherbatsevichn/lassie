@@ -15,7 +15,7 @@ use Bitrix\Main\Localization\Loc;
 */
 
 $this->setFrameMode(true);
-
+//dump($arResult["OFFERS"]);["OFFERS"]["PROPERTIES"]
 $templateLibrary = array('popup', 'fx');
 $currencyList = '';
 
@@ -632,6 +632,15 @@ $themeClass = isset($arParams['TEMPLATE_THEME']) ? ' bx-'.$arParams['TEMPLATE_TH
 											}
 											?>
 										</div>
+									</div>
+									<div>
+										<?$APPLICATION->IncludeComponent('custom:by1click', '.default', 
+											Array(
+											"MODE" => "DETAIL",
+											"OFFERS" => $arResult["OFFERS"],
+											'AJAX_MODE' => 'Y',
+        									"AJAX-REQUEST" => 'N'
+											));?>
 									</div>
 									<?php
 									if ($showSubscribe)

@@ -186,7 +186,7 @@ $themeClass = isset($arParams['TEMPLATE_THEME']) ? ' bx-'.$arParams['TEMPLATE_TH
 			"PAGE_DESCRIPTION",
 			$arResult['DESCRIPTION'], 
 		);
-		//$GLOBALS['PAGE_DESCRIPTION'] = $arResult['DESCRIPTION'];
+		
 	}
 	
 	//endregion

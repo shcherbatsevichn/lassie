@@ -15,6 +15,8 @@ use Bitrix\Main\Localization\Loc;
 $context = Main\Application::getInstance()->getContext();
 $request = $context->getRequest();
 
+//dump($arResult["BASKET_ITEMS"]);
+
 $arParams['ALLOW_USER_PROFILES'] = $arParams['ALLOW_USER_PROFILES'] === 'Y' ? 'Y' : 'N';
 $arParams['SKIP_USELESS_BLOCK'] = $arParams['SKIP_USELESS_BLOCK'] === 'N' ? 'N' : 'Y';
 
@@ -305,12 +307,12 @@ else
 	<form action="<?=POST_FORM_ACTION_URI?>" method="POST" name="ORDER_FORM" class="bx-soa-wrapper mb-4<?=$themeClass?>" id="bx-soa-order-form" enctype="multipart/form-data">
 		<?
 		echo bitrix_sessid_post();
-
 		if ($arResult['PREPAY_ADIT_FIELDS'] <> '')
 		{
 			echo $arResult['PREPAY_ADIT_FIELDS'];
 		}
 		?>
+
 		<input type="hidden" name="<?=$arParams['ACTION_VARIABLE']?>" value="saveOrderAjax">
 		<input type="hidden" name="location_type" value="code">
 		<input type="hidden" name="BUYER_STORE" id="BUYER_STORE" value="<?=$arResult['BUYER_STORE']?>">
@@ -490,6 +492,15 @@ else
 			<div id="bx-soa-total" class="col-lg-4 col-md-5 bx-soa-sidebar">
 				<div class="bx-soa-cart-total-ghost"></div>
 				<div class="bx-soa-cart-total"></div>
+				<div>
+				<?$APPLICATION->IncludeComponent('custom:by1click', '.default', 
+					Array(
+						"MODE" => "ORDER",
+						"BASKET_ITEMS" => $arResult["BASKET_ITEMS"],
+						'AJAX_MODE' => 'Y',
+						"AJAX-REQUEST" => 'N'
+					));?>
+				</div>
 			</div>
 		</div>
 	</form>
