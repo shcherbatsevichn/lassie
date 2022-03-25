@@ -1,7 +1,10 @@
 <?php
-namespace Lib\Cuponlib\Internals;
+namespace Lib\Cuponlib;
 
 use Bitrix\Main\Entity;
+use Bitrix\Main\ORM\Fields\IntegerField;
+use Bitrix\Main\ORM\Fields\Relations\Reference;
+use Bitrix\Main\ORM\Query\Join;
 
 class CuponTable extends Entity\DataManager
 {
@@ -17,6 +20,12 @@ class CuponTable extends Entity\DataManager
                 'primary' => true,
                 'autocomplete' => true
             )),
+                (new Reference(
+                    'CUPONE_ID',
+                    CuponConnectionTable::class,
+                    Join::on('this.ID', 'ref.CUPONE_ID')
+                ))
+                ->configureJoinType('inner'),
             new Entity\StringField('CUPONE_CODE', array(
                 'required' => true,
                 'column_name' => 'CUPONE_CODE'

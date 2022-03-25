@@ -1,15 +1,16 @@
 <?php
 namespace Lib\Cuponlib;
 
-use Lib\Cuponlib\Internals\CuponTable;
-use Lib\Cuponlib\Internals\CuponConnectionTable;
+use Lib\Cuponlib\CuponTable;
+use Lib\Cuponlib\CuponConnectionTable;
 use Bitrix\Main\SystemException;
 
 class CuponCreater {
 
     static function createCupon($userID){
+        $cuponeName = self::generateCuponName();
         $cuponParams = array(             //параметры для записи купона в таблицу
-            'CUPONE_CODE' => self::generateCuponName(),
+            'CUPONE_CODE' => $cuponeName,
             'COMMENTS' => 'Этот купон выдаётся за заказ в 1 клик',
             'DISCOUNT_COUNT' => 500,
             'ID_OWNER' => intval($userID),
@@ -22,17 +23,11 @@ class CuponCreater {
         }else{
             throw new SystemException("Произошла ошибка создания купона, попробуйте снова или обратитесь к администратору сайта");
         }
-        //регистрируем его в таблице связей
-        $registateParams = array(
-            'CUPONE_ID' => $cuponID,
-            'ORDER_ID' => 'null',
-            'USE'=> 'N',
-        );
-        $result = CuponConnectionTable::add($registateParams);
-        return true;
+        
+        return $cuponeName;
     }
 
-    static function getCupon($userID){
+    static function getCupon($userID, $orderID){
         //получаем все купоны для пользователя
         $result = CuponTable::getList(array(
             'filter' => array('=ID_OWNER' => $userID)
@@ -48,28 +43,30 @@ class CuponCreater {
             if($cupon['ACTIVE'] == 'Y'){
                 $cuponResult['ID'] = $cupon['ID'];
                 $cuponResult['DISCOUNT'] = $cupon['DISCOUNT_COUNT'];
-                return $cuponResult;
+                
             }
+        }
+        if($cuponResult){
+        $registateParams = array(
+            'CUPONE_ID' => $cuponResult['ID'],
+            'ORDER_ID' => $orderID,
+            'USE'=> 'N',
+        );
+        $result = CuponConnectionTable::add($registateParams);
+        $cuponResult['REG_ID'] = $result->getId();
+        return $cuponResult;
         }
         return false;
     }
 
-    static function applyCupon($cuponID, $orderID){
+    static function applyCupon($cuponID, $orderID, $regID){
         //обновляем таблицу связей
         $registateParams = array(
+            'CUPONE_ID' => $cuponID,
             'ORDER_ID' => $orderID,
             'USE'=> 'Y',
         );
-        $result = CuponTable::getList(array(
-            'filter' => array('=ID' => $cuponID)
-        ));
-        $conectionRow;
-        while ($row = $result->fetch())
-        {
-            $conectionRow = $row;
-        }
-		//dump($conectionRow);
-        $updateConnect = CuponConnectionTable::update($conectionRow['ID'],$registateParams);
+        $updateConnect = CuponConnectionTable::update($regID,$registateParams);
         //обновляем таблицу с купонам 
         $cuponParams = array(
             'ACTIVE' => 'N',
