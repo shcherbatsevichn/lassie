@@ -522,34 +522,30 @@ $templateData = array(
 					?>
 					<div class="form__row form__row_direction_column">
 					<label class="form__label">Цена, руб.</label>
-								<?//dump($arItem["VALUES"], true);?>
+								<div id="slider-range"></div>
 								<div class="range-slider">
 									<input class="range-slider__elem" type="text">
 									<div class="range-slider__output-row">
-									<script>
-									console.log("");
-									</script>
 									<input
-											class="input range-slider__output"
-											type="text"
-											name="<?echo $arItem["VALUES"]["MIN"]["CONTROL_NAME"]?>"
-											id="<?echo $arItem["VALUES"]["MIN"]["CONTROL_ID"]?>"
-											value="<?echo $arItem["VALUES"]["MIN"]["HTML_VALUE"]?>"
-											size="5"
-											onkeyup="smartFilter.keyup(this)"
-											data-type="min" 
-										/>
-										<input
-											class="input range-slider__output"
-											type="text"
-											name="<?echo $arItem["VALUES"]["MAX"]["CONTROL_NAME"]?>"
-											id="<?echo $arItem["VALUES"]["MAX"]["CONTROL_ID"]?>"
-											value="<?echo $arItem["VALUES"]["MAX"]["HTML_VALUE"]?>"
-											size="5"
-											onkeyup="smartFilter.keyup(this)"
-											data-type="max"
-										/>
-										
+										class="input range-slider__output"
+										type="text"
+										name="<?echo $arItem["VALUES"]["MIN"]["CONTROL_NAME"]?>"
+										id="<?echo $arItem["VALUES"]["MIN"]["CONTROL_ID"]?>"
+										value="<?echo $arItem["VALUES"]["MIN"]["HTML_VALUE"]?>"
+										size="5"
+										onkeyup="smartFilter.keyup(this)"
+										data-type="min" 
+									/>
+									<input
+										class="input range-slider__output"
+										type="text"
+										name="<?echo $arItem["VALUES"]["MAX"]["CONTROL_NAME"]?>"
+										id="<?echo $arItem["VALUES"]["MAX"]["CONTROL_ID"]?>"
+										value="<?echo $arItem["VALUES"]["MAX"]["HTML_VALUE"]?>"
+										size="5"
+										onkeyup="smartFilter.keyup(this)"
+										data-type="max"
+									/>	
 									</div>
 								</div>
 								<div  id="drag_track_<?=$key?>" style="display: none">
