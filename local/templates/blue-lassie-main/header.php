@@ -30,6 +30,12 @@ Loc::loadMessages(__FILE__);
         <? $APPLICATION->ShowHead(); ?>
 		<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;subset=latin,cyrillic" rel="stylesheet">
 		<link href="<?=SITE_TEMPLATE_PATH?>/assets/styles/app.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="/resources/demos/style.css">
+		<link
+    		rel="stylesheet"
+    		href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  		/>
 		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   		<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 	</head>
